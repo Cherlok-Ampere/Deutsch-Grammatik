@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsche Grammatik — Grundlagen</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f0e8;
+    --gold: #c9a84c;
+    --gold-light: #e8d4a0;
+    --red: #9b2335;
+    --grey: #4a4a4a;
+    --grey-light: #e0dbd0;
+    --blue: #1a3a5c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--black);
+    color: var(--white);
+    padding: 60px 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 400px; height: 100%;
+    background: var(--gold);
+    opacity: 0.08;
+    transform: skewX(-15deg) translateX(100px);
+  }
+  .header-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  header h1 span { color: var(--gold); }
+  header p {
+    margin-top: 20px;
+    font-size: 15px;
+    color: #aaa;
+    max-width: 500px;
+    font-weight: 300;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--black);
+    border-top: 1px solid #222;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav button {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: #888;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 18px 28px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  nav button:hover { color: var(--white); }
+  nav button.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* SECTION TITLES */
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 48px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--black);
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .section-title-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .section-title-block p {
+    font-size: 13px;
+    color: var(--grey);
+    margin-top: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* CASE CARDS */
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .case-card {
+    border: 2px solid var(--black);
+    padding: 28px;
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .case-card:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 var(--black); }
+  .case-card::before {
+    content: attr(data-case);
+    position: absolute;
+    top: -1px; right: 16px;
+    background: var(--black);
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 3px 8px;
+    text-transform: uppercase;
+  }
+  .case-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .case-card .case-question {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--red);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .case-card p { font-size: 14px; color: var(--grey); line-height: 1.6; }
+  .case-card .example {
+    margin-top: 12px;
+    background: var(--grey-light);
+    padding: 10px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    border-left: 3px solid var(--gold);
+  }
+  .case-card .example em { color: var(--red); font-style: normal; font-weight: 500; }
+
+  /* TABLES */
+  .table-block { margin-bottom: 48px; }
+  .table-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 12px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th {
+    background: var(--black);
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+  }
+  td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--grey-light);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+  td.highlight { color: var(--red); font-weight: 500; font-family: 'IBM Plex Mono', monospace; }
+  td.case-nom { background: #e8f4e8; }
+  td.case-akk { background: #fdf0e8; }
+  td.case-dat { background: #e8eef8; }
+  td.case-gen { background: #f8e8f0; }
+
+  /* PREPOSITIONS */
+  .prep-section { margin-bottom: 40px; }
+  .prep-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .prep-case-badge {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 6px 14px;
+    text-transform: uppercase;
+  }
+  .prep-case-badge.akk { background: #9b4a1a; }
+  .prep-case-badge.dat { background: var(--blue); }
+  .prep-case-badge.gen { background: var(--red); }
+  .prep-case-badge.wechsel { background: #2a6b2a; }
+  .prep-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .prep-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .prep-item {
+    border: 1px solid var(--grey-light);
+    padding: 14px 16px;
+    background: white;
+  }
+  .prep-item strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .prep-item span { font-size: 12px; color: var(--grey); }
+  .prep-item .ex { font-size: 12px; color: var(--blue); font-style: italic; margin-top: 4px; }
+
+  /* WECHSEL TABLE */
+  .wechsel-note {
+    background: var(--black);
+    color: var(--white);
+    padding: 16px 20px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    border-left: 4px solid var(--gold);
+  }
+  .wechsel-note strong { color: var(--gold); }
+
+  /* ADJECTIVE ENDINGS */
+  .adj-tabs { display: flex; gap: 4px; margin-bottom: 20px; }
+  .adj-tab {
+    background: var(--grey-light);
+    border: none;
+    padding: 8px 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .adj-tab.active { background: var(--black); color: var(--gold); }
+  .adj-panel { display: none; }
+  .adj-panel.active { display: block; }
+
+  /* PRONOUNS */
+  .pronoun-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .pronoun-card {
+    border: 1px solid var(--grey-light);
+    overflow: hidden;
+  }
+  .pronoun-card-header {
+    background: var(--black);
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 16px;
+  }
+
+  /* TIP BOXES */
+  .tip {
+    background: linear-gradient(135deg, #fffbe8, #fff8d0);
+    border-left: 4px solid var(--gold);
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+  .tip strong { color: var(--black); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 2px; display: block; margin-bottom: 6px; text-transform: uppercase; }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: #555;
+    text-align: center;
+    padding: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 80px;
+  }
+  footer span { color: var(--gold); }
+
+  @media (max-width: 700px) {
+    header { padding: 40px 24px; }
+    main { padding: 40px 20px; }
+    .cases-grid { grid-template-columns: 1fr; }
+    .pronoun-grid { grid-template-columns: 1fr; }
+    .section-num { font-size: 50px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Referenz · Grammatik · A1 → C1</div>
+  <h1>Deutsche<br><span>Grammatik</span></h1>
+  <p>Die vier Fälle, Deklination der Artikel und Adjektive, Personalpronomen und die wichtigsten Präpositionen.</p>
+</header>
+
+<nav>
+  <button class="active" onclick="showSection('faelle')">§1 Die vier Fälle</button>
+  <button onclick="showSection('artikel')">§2 Artikel & Deklination</button>
+  <button onclick="showSection('adjektive')">§3 Adjektivdeklination</button>
+  <button onclick="showSection('pronomen')">§4 Pronomen</button>
+  <button onclick="showSection('praepositionen')">§5 Präpositionen</button>
+  <button onclick="showSection('vergangenheit')">§6 Perfekt & Präteritum</button>
+  <button onclick="showSection('passiv')">§7 Passiv</button>
+  <button onclick="showSection('komparativ')">§8 Komparativ & Superlativ</button>
+</nav>
+
+<main>
+
+  <!-- §1 DIE VIER FÄLLE -->
+  <div class="section active" id="faelle">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title-block">
+        <h2>Die vier Fälle</h2>
+        <p>Nominativ · Akkusativ · Dativ · Genitiv</p>
+      </div>
+    </div>
+
+    <div class="cases-grid">
+      <div class="case-card" data-case="1. Fall">
+        <h3>Nominativ</h3>
+        <div class="case-question">Wer? Was?</div>
+        <p>Das Subjekt des Satzes — derjenige, der die Handlung ausführt.</p>
+        <div class="example"><em>Der Hund</em> bellt laut. / <em>Eine Frau</em> liest das Buch.</div>
+      </div>
+      <div class="case-card" data-case="2. Fall">
+        <h3>Akkusativ</h3>
+        <div class="case-question">Wen? Was?</div>
+        <p>Das direkte Objekt — das, worauf die Handlung direkt gerichtet ist.</p>
+        <div class="example">Ich sehe <em>den Hund</em>. / Er kauft <em>einen Apfel</em>.</div>
+      </div>
+      <div class="case-card" data-case="3. Fall">
+        <h3>Dativ</h3>
+        <div class="case-question">Wem?</div>
+        <p>Das indirekte Objekt — der Empfänger oder Begünstigte der Handlung.</p>
+        <div class="example">Ich gebe <em>dem Kind</em> ein Buch. / Sie hilft <em>einer Freundin</em>.</div>
+      </div>
+      <div class="case-card" data-case="4. Fall">
+        <h3>Genitiv</h3>
+        <div class="case-question">Wessen?</div>
+        <p>Drückt Zugehörigkeit oder Besitz aus. Im Alltag oft durch Dativ ersetzt.</p>
+        <div class="example">Das Auto <em>des Mannes</em>. / Die Farbe <em>des Himmels</em>.</div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>⚡ Merktrick</strong>
+      Nominativ = Subjekt (Täter). Akkusativ = direktes Objekt (Opfer der Handlung). Dativ = indirektes Objekt (Empfänger). Genitiv = Besitz (von wem?). Die Frage «Wer tut was wem?» deckt die drei häufigsten Fälle ab.
+    </div>
+
+    <div class="table-block">
+      <div class="table-label">Überblick — Bestimmter Artikel nach Fall</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Fall</th>
+            <th>Maskulin</th>
+            <th>Feminin</th>
+            <th>Neutrum</th>
+            <th>Plural</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nominativ</strong></td>
+            <td class="case-nom highlight">der</td>
+            <td class="case-nom highlight">die</td>
+            <td class="case-nom highlight">das</td>
+            <td class="case-nom highlight">die</td>
+          </tr>
+          <tr>
+            <td><strong>Akkusativ</strong></td>
+            <td class="case-akk highlight">den</td>
+            <td class="case-akk highlight">die</td>
+            <td class="case-akk highlight">das</td>
+            <td class="case-akk highlight">die</td>
+          </tr>
+          <tr>
+            <td><strong>Dativ</strong></td>
+            <td class="case-dat highlight">dem</td>
+            <td class="case-dat highlight">der</td>
+            <td class="case-dat highlight">dem</td>
+            <td class="case-dat highlight">den (+n)</td>
+          </tr>
+          <tr>
+            <td><strong>Genitiv</strong></td>
+            <td class="case-gen highlight">des (+s/es)</td>
+            <td class="case-gen highlight">der</td>
+            <td class="case-gen highlight">des (+s/es)</td>
+            <td class="case-gen highlight">der</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip">
+      <strong>💡 Dativ Plural</strong>
+      Im Dativ Plural erhält das Nomen immer ein <strong>-n</strong> am Ende, falls es nicht schon auf -n oder -s endet: <em>den Kindern, den Männern, den Autos</em>.
+    </div>
+  </div>
+
+  <!-- §2 ARTIKEL & DEKLINATION -->
+  <div class="section" id="artikel">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title-block">
+        <h2>Artikel & Deklination</h2>
+        <p>Bestimmter · Unbestimmter · Negativartikel · Possessivartikel</p>
+      </div>
+    </div>
+
+    <div class="table-block">
+      <div class="table-label">Unbestimmter Artikel — ein / eine</div>
+      <table>
+        <thead>
+          <tr><th>Fall</th><th>Maskulin</th><th>Feminin</th><th>Neutrum</th><th>Plural</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nominativ</strong></td>
+            <td class="case-nom highlight">ein</td>
+            <td class="case-nom highlight">eine</td>
+            <td class="case-nom highlight">ein</td>
+            <td class="case-nom">—</td>
+          </tr>
+          <tr>
+            <td><strong>Akkusativ</strong></td>
+            <td class="case-akk highlight">einen</td>
+            <td class="case-akk highlight">eine</td>
+            <td class="case-akk highlight">ein</td>
+            <td class="case-akk">—</td>
+          </tr>
+          <tr>
+            <td><strong>Dativ</strong></td>
+            <td class="case-dat highlight">einem</td>
+            <td class="case-dat highlight">einer</td>
+            <td class="case-dat highlight">einem</td>
+            <td class="case-dat">—</td>
+          </tr>
+          <tr>
+            <td><strong>Genitiv</strong></td>
+            <td class="case-gen highlight">eines</td>
+            <td class="case-gen highlight">einer</td>
+            <td class="case-gen highlight">eines</td>
+            <td class="case-gen">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-block">
+      <div class="table-label">Negativartikel — kein / keine</div>
+      <table>
+        <thead>
+          <tr><th>Fall</th><th>Maskulin</th><th>Feminin</th><th>Neutrum</th><th>Plural</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nominativ</strong></td>
+            <td class="case-nom highlight">kein</td>
+            <td class="case-nom highlight">keine</td>
+            <td class="case-nom highlight">kein</td>
+            <td class="case-nom highlight">keine</td>
+          </tr>
+          <tr>
+            <td><strong>Akkusativ</strong></td>
+            <td class="case-akk highlight">keinen</td>
+            <td class="case-akk highlight">keine</td>
+            <td class="case-akk highlight">kein</td>
+            <td class="case-akk highlight">keine</td>
+          </tr>
+          <tr>
+            <td><strong>Dativ</strong></td>
+            <td class="case-dat highlight">keinem</td>
+            <td class="case-dat highlight">keiner</td>
+            <td class="case-dat highlight">keinem</td>
+            <td class="case-dat highlight">keinen</td>
+          </tr>
+          <tr>
+            <td><strong>Genitiv</strong></td>
+            <td class="case-gen highlight">keines</td>
+            <td class="case-gen highlight">keiner</td>
+            <td class="case-gen highlight">keines</td>
+            <td class="case-gen highlight">keiner</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-block">
+      <div class="table-label">Possessivartikel — mein (Schema für alle: mein / dein / sein / ihr / unser / euer / ihr / Ihr)</div>
+      <table>
+        <thead>
+          <tr><th>Fall</th><th>Maskulin</th><th>Feminin</th><th>Neutrum</th><th>Plural</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nominativ</strong></td>
+            <td class="case-nom highlight">mein</td>
+            <td class="case-nom highlight">meine</td>
+            <td class="case-nom highlight">mein</td>
+            <td class="case-nom highlight">meine</td>
+          </tr>
+          <tr>
+            <td><strong>Akkusativ</strong></td>
+            <td class="case-akk highlight">meinen</td>
+            <td class="case-akk highlight">meine</td>
+            <td class="case-akk highlight">mein</td>
+            <td class="case-akk highlight">meine</td>
+          </tr>
+          <tr>
+            <td><strong>Dativ</strong></td>
+            <td class="case-dat highlight">meinem</td>
+            <td class="case-dat highlight">meiner</td>
+            <td class="case-dat highlight">meinem</td>
+            <td class="case-dat highlight">meinen</td>
+          </tr>
+          <tr>
+            <td><strong>Genitiv</strong></td>
+            <td class="case-gen highlight">meines</td>
+            <td class="case-gen highlight">meiner</td>
+            <td class="case-gen highlight">meines</td>
+            <td class="case-gen highlight">meiner</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip">
+      <strong>💡 Schema kein/mein</strong>
+      Die Possessiv- und Negativartikel folgen demselben Muster wie der unbestimmte Artikel: gleiche Endungen, einfach den Stamm wechseln (mein-, dein-, sein-, ihr-, unser-, euer-, ihr-).
+    </div>
+  </div>
+
+  <!-- §3 ADJEKTIVDEKLINATION -->
+  <div class="section" id="adjektive">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title-block">
+        <h2>Adjektivdeklination</h2>
+        <p>Stark · Schwach · Gemischt</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>📌 Grundregel</strong>
+      Das Adjektiv trägt die Kasusendung, wenn der Artikel sie nicht zeigt (starke Deklination). Wenn der Artikel die Endung schon trägt (bestimmter Artikel), wird das Adjektiv «geschwächt» (nur -e oder -en).
+    </div>
+
+    <div class="adj-tabs">
+      <button class="adj-tab active" onclick="showAdj('schwach')">Schwach (der/die/das)</button>
+      <button class="adj-tab" onclick="showAdj('gemischt')">Gemischt (ein/kein/mein)</button>
+      <button class="adj-tab" onclick="showAdj('stark')">Stark (ohne Artikel)</button>
+    </div>
+
+    <div class="adj-panel active" id="adj-schwach">
+      <div class="table-label">Schwache Deklination — nach bestimmtem Artikel</div>
+      <table>
+        <thead>
+          <tr><th>Fall</th><th>Maskulin</th><th>Feminin</th><th>Neutrum</th><th>Plural</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nominativ</strong></td>
+            <td>der alt<strong style="color:var(--red)">e</strong> Mann</td>
+            <td>die alt<strong style="color:var(--red)">e</strong> Frau</td>
+            <td>das alt<strong style="color:var(--red)">e</strong> Kind</td>
+            <td>die alt<strong style="color:var(--red)">en</strong> Leute</td>
+          </tr>
+          <tr>
+            <td><strong>Akkusativ</strong></td>
+            <td>den alt<strong style="color:var(--red)">en</strong> Mann</td>
+            <td>die alt<strong style="color:var(--red)">e</strong> Frau</td>
+            <td>das alt<strong style="color:var(--red)">e</strong> Kind</td>
+            <td>die alt<strong style="color:var(--red)">en</strong> Leute</td>
+          </tr>
+          <tr>
+            <td><strong>Dativ</strong></td>
+            <td>dem alt<strong style="color:var(--red)">en</strong> Mann</td>
+            <td>der alt<strong style="color:var(--red)">en</strong> Frau</td>
+            <td>dem alt<strong style="color:var(--red)">en</strong> Kind</td>
+            <td>den alt<strong style="color:var(--red)">en</strong> Leuten</td>
+          </tr>
+          <tr>
+            <td><strong>Genitiv</strong></td>
+            <td>des alt<strong style="color:var(--red)">en</strong> Mannes</td>
+            <td>der alt<strong style="color:var(--red)">en</strong> Frau</td>
+            <td>des alt<strong style="color:var(--red)">en</strong> Kindes</td>
+            <td>der alt<strong style="color:var(--red)">en</strong> Leute</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tip" style="margin-top:16px">
+        <strong>Regel</strong>
+        Nach bestimmtem Artikel: <strong>-e</strong> nur bei Nom. Sg. (alle 3 Genera) und Akk. Fem./Neut. → überall sonst <strong>-en</strong>.
+      </div>
+    </div>
+
+    <div class="adj-panel" id="adj-gemischt">
+      <div class="table-label">Gemischte Deklination — nach unbestimmtem Artikel / kein / mein…</div>
+      <table>
+        <thead>
+          <tr><th>Fall</th><th>Maskulin</th><th>Feminin</th><th>Neutrum</th><th>Plural</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nominativ</strong></td>
+            <td>ein alt<strong style="color:var(--red)">er</strong> Mann</td>
+            <td>eine alt<strong style="color:var(--red)">e</strong> Frau</td>
+            <td>ein alt<strong style="color:var(--red)">es</strong> Kind</td>
+            <td>keine alt<strong style="color:var(--red)">en</strong> Leute</td>
+          </tr>
+          <tr>
+            <td><strong>Akkusativ</strong></td>
+            <td>einen alt<strong style="color:var(--red)">en</strong> Mann</td>
+            <td>eine alt<strong style="color:var(--red)">e</strong> Frau</td>
+            <td>ein alt<strong style="color:var(--red)">es</strong> Kind</td>
+            <td>keine alt<strong style="color:var(--red)">en</strong> Leute</td>
+          </tr>
+          <tr>
+            <td><strong>Dativ</strong></td>
+            <td>einem alt<strong style="color:var(--red)">en</strong> Mann</td>
+            <td>einer alt<strong style="color:var(--red)">en</strong> Frau</td>
+            <td>einem alt<strong style="color:var(--red)">en</strong> Kind</td>
+            <td>keinen alt<strong style="color:var(--red)">en</strong> Leuten</td>
+          </tr>
+          <tr>
+            <td><strong>Genitiv</strong></td>
+            <td>eines alt<strong style="color:var(--red)">en</strong> Mannes</td>
+            <td>einer alt<strong style="color:var(--red)">en</strong> Frau</td>
+            <td>eines alt<strong style="color:var(--red)">en</strong> Kindes</td>
+            <td>keiner alt<strong style="color:var(--red)">en</strong> Leute</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tip" style="margin-top:16px">
+        <strong>Regel</strong>
+        Wo der Artikel keine eindeutige Endung hat (Nom. M., Nom./Akk. N.), übernimmt das Adjektiv die starke Endung des bestimmten Artikels.
+      </div>
+    </div>
+
+    <div class="adj-panel" id="adj-stark">
+      <div class="table-label">Starke Deklination — ohne Artikel</div>
+      <table>
+        <thead>
+          <tr><th>Fall</th><th>Maskulin</th><th>Feminin</th><th>Neutrum</th><th>Plural</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nominativ</strong></td>
+            <td>alt<strong style="color:var(--red)">er</strong> Wein</td>
+            <td>frisch<strong style="color:var(--red)">e</strong> Milch</td>
+            <td>kalt<strong style="color:var(--red)">es</strong> Wasser</td>
+            <td>gut<strong style="color:var(--red)">e</strong> Leute</td>
+          </tr>
+          <tr>
+            <td><strong>Akkusativ</strong></td>
+            <td>alt<strong style="color:var(--red)">en</strong> Wein</td>
+            <td>frisch<strong style="color:var(--red)">e</strong> Milch</td>
+            <td>kalt<strong style="color:var(--red)">es</strong> Wasser</td>
+            <td>gut<strong style="color:var(--red)">e</strong> Leute</td>
+          </tr>
+          <tr>
+            <td><strong>Dativ</strong></td>
+            <td>alt<strong style="color:var(--red)">em</strong> Wein</td>
+            <td>frisch<strong style="color:var(--red)">er</strong> Milch</td>
+            <td>kalt<strong style="color:var(--red)">em</strong> Wasser</td>
+            <td>gut<strong style="color:var(--red)">en</strong> Leuten</td>
+          </tr>
+          <tr>
+            <td><strong>Genitiv</strong></td>
+            <td>alt<strong style="color:var(--red)">en</strong> Weines</td>
+            <td>frisch<strong style="color:var(--red)">er</strong> Milch</td>
+            <td>kalt<strong style="color:var(--red)">en</strong> Wassers</td>
+            <td>gut<strong style="color:var(--red)">er</strong> Leute</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tip" style="margin-top:16px">
+        <strong>Regel</strong>
+        Ohne Artikel trägt das Adjektiv die vollständige Endung des bestimmten Artikels (außer Gen. M./N.: -en statt -es).
+      </div>
+    </div>
+  </div>
+
+  <!-- §4 PRONOMEN -->
+  <div class="section" id="pronomen">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title-block">
+        <h2>Personalpronomen</h2>
+        <p>Nominativ · Akkusativ · Dativ</p>
+      </div>
+    </div>
+
+    <div class="table-block">
+      <table>
+        <thead>
+          <tr>
+            <th>Person</th>
+            <th>Nominativ <small>(Wer?)</small></th>
+            <th>Akkusativ <small>(Wen?)</small></th>
+            <th>Dativ <small>(Wem?)</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1. Sg.</td>
+            <td class="case-nom highlight">ich</td>
+            <td class="case-akk highlight">mich</td>
+            <td class="case-dat highlight">mir</td>
+          </tr>
+          <tr>
+            <td>2. Sg.</td>
+            <td class="case-nom highlight">du</td>
+            <td class="case-akk highlight">dich</td>
+            <td class="case-dat highlight">dir</td>
+          </tr>
+          <tr>
+            <td>3. Sg. M.</td>
+            <td class="case-nom highlight">er</td>
+            <td class="case-akk highlight">ihn</td>
+            <td class="case-dat highlight">ihm</td>
+          </tr>
+          <tr>
+            <td>3. Sg. F.</td>
+            <td class="case-nom highlight">sie</td>
+            <td class="case-akk highlight">sie</td>
+            <td class="case-dat highlight">ihr</td>
+          </tr>
+          <tr>
+            <td>3. Sg. N.</td>
+            <td class="case-nom highlight">es</td>
+            <td class="case-akk highlight">es</td>
+            <td class="case-dat highlight">ihm</td>
+          </tr>
+          <tr>
+            <td>1. Pl.</td>
+            <td class="case-nom highlight">wir</td>
+            <td class="case-akk highlight">uns</td>
+            <td class="case-dat highlight">uns</td>
+          </tr>
+          <tr>
+            <td>2. Pl.</td>
+            <td class="case-nom highlight">ihr</td>
+            <td class="case-akk highlight">euch</td>
+            <td class="case-dat highlight">euch</td>
+          </tr>
+          <tr>
+            <td>3. Pl.</td>
+            <td class="case-nom highlight">sie</td>
+            <td class="case-akk highlight">sie</td>
+            <td class="case-dat highlight">ihnen</td>
+          </tr>
+          <tr>
+            <td>Formal (Sie)</td>
+            <td class="case-nom highlight">Sie</td>
+            <td class="case-akk highlight">Sie</td>
+            <td class="case-dat highlight">Ihnen</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-block">
+      <div class="table-label">Reflexivpronomen</div>
+      <table>
+        <thead>
+          <tr><th>Person</th><th>Akkusativ (sich waschen)</th><th>Dativ (sich vorstellen)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ich</td><td class="highlight">mich</td><td class="highlight">mir</td></tr>
+          <tr><td>du</td><td class="highlight">dich</td><td class="highlight">dir</td></tr>
+          <tr><td>er / sie / es</td><td class="highlight">sich</td><td class="highlight">sich</td></tr>
+          <tr><td>wir</td><td class="highlight">uns</td><td class="highlight">uns</td></tr>
+          <tr><td>ihr</td><td class="highlight">euch</td><td class="highlight">euch</td></tr>
+          <tr><td>sie / Sie</td><td class="highlight">sich</td><td class="highlight">sich</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- §5 PRÄPOSITIONEN -->
+  <div class="section" id="praepositionen">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-title-block">
+        <h2>Präpositionen</h2>
+        <p>Akkusativ · Dativ · Genitiv · Wechselpräpositionen</p>
+      </div>
+    </div>
+
+    <!-- AKKUSATIV -->
+    <div class="prep-section">
+      <div class="prep-header">
+        <div class="prep-case-badge akk">+ Akkusativ</div>
+        <h3>Nur Akkusativ</h3>
+      </div>
+      <div class="prep-grid">
+        <div class="prep-item">
+          <strong>durch</strong>
+          <span>durch + Akk. = durch etw. hindurch</span>
+          <div class="ex">Wir fahren <em>durch den Tunnel</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>für</strong>
+          <span>für + Akk. = für jmd./etw.</span>
+          <div class="ex">Das ist <em>für dich</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>gegen</strong>
+          <span>gegen + Akk. = entgegen / dagegen</span>
+          <div class="ex">Er kämpft <em>gegen den Wind</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>ohne</strong>
+          <span>ohne + Akk. = without</span>
+          <div class="ex">Kaffee <em>ohne Zucker</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>um</strong>
+          <span>um + Akk. = around / at (time)</span>
+          <div class="ex"><em>Um 8 Uhr</em>. / <em>Um den Tisch</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>bis</strong>
+          <span>bis + Akk. = until / up to</span>
+          <div class="ex"><em>Bis nächsten Montag</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>entlang</strong>
+          <span>entlang + Akk. (nachgestellt)</span>
+          <div class="ex"><em>Den Fluss entlang</em> gehen.</div>
+        </div>
+        <div class="prep-item">
+          <strong>wider</strong>
+          <span>wider + Akk. = against (literary)</span>
+          <div class="ex"><em>Wider alle Erwartungen</em>.</div>
+        </div>
+      </div>
+      <div class="tip" style="margin-top:0">
+        <strong>🔑 Eselsbrücke DURCH FÜR GEGEN OHNE UM</strong>
+        Diese fünf häufigsten Akkusativpräpositionen lassen sich als Akronym merken: <strong>D-F-G-O-U</strong>.
+      </div>
+    </div>
+
+    <!-- DATIV -->
+    <div class="prep-section">
+      <div class="prep-header">
+        <div class="prep-case-badge dat">+ Dativ</div>
+        <h3>Nur Dativ</h3>
+      </div>
+      <div class="prep-grid">
+        <div class="prep-item">
+          <strong>aus</strong>
+          <span>Herkunft / Material</span>
+          <div class="ex">Er kommt <em>aus Berlin</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>bei</strong>
+          <span>Nähe / beim Arbeitsplatz</span>
+          <div class="ex">Ich wohne <em>bei meiner Mutter</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>mit</strong>
+          <span>Begleitung / Mittel</span>
+          <div class="ex">Ich fahre <em>mit dem Zug</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>nach</strong>
+          <span>Richtung (Länder) / nach + Zeit</span>
+          <div class="ex"><em>Nach Hause</em>. / <em>Nach dem Essen</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>seit</strong>
+          <span>Zeitdauer (noch andauernd)</span>
+          <div class="ex">Ich lerne <em>seit drei Jahren</em> Deutsch.</div>
+        </div>
+        <div class="prep-item">
+          <strong>von</strong>
+          <span>Herkunft / Genitiversatz</span>
+          <div class="ex">Das Buch <em>von Goethe</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>zu</strong>
+          <span>Ziel (Personen / Orte)</span>
+          <div class="ex">Ich gehe <em>zum Arzt</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>gegenüber</strong>
+          <span>gegenüber + Dat. / nachgestellt</span>
+          <div class="ex"><em>Mir gegenüber</em> sitzt er.</div>
+        </div>
+        <div class="prep-item">
+          <strong>außer</strong>
+          <span>Ausnahme</span>
+          <div class="ex"><em>Außer mir</em> war niemand da.</div>
+        </div>
+      </div>
+      <div class="tip" style="margin-top:0">
+        <strong>🔑 Eselsbrücke</strong>
+        <strong>AUS BEI MIT NACH SEIT VON ZU</strong> — diese 7 Dativpräpositionen auswendig lernen!
+      </div>
+    </div>
+
+    <!-- GENITIV -->
+    <div class="prep-section">
+      <div class="prep-header">
+        <div class="prep-case-badge gen">+ Genitiv</div>
+        <h3>Genitiv-Präpositionen</h3>
+      </div>
+      <div class="prep-grid">
+        <div class="prep-item">
+          <strong>wegen</strong>
+          <span>wegen + Gen. = à cause de</span>
+          <div class="ex"><em>Wegen des Regens</em> blieb ich zu Hause.</div>
+        </div>
+        <div class="prep-item">
+          <strong>trotz</strong>
+          <span>trotz + Gen. = malgré</span>
+          <div class="ex"><em>Trotz des Wetters</em> gingen wir aus.</div>
+        </div>
+        <div class="prep-item">
+          <strong>während</strong>
+          <span>während + Gen. = pendant</span>
+          <div class="ex"><em>Während des Unterrichts</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>statt / anstatt</strong>
+          <span>statt + Gen. = au lieu de</span>
+          <div class="ex"><em>Statt des Autos</em> nahm er die U-Bahn.</div>
+        </div>
+        <div class="prep-item">
+          <strong>aufgrund</strong>
+          <span>aufgrund + Gen. = en raison de</span>
+          <div class="ex"><em>Aufgrund seiner Arbeit</em>.</div>
+        </div>
+        <div class="prep-item">
+          <strong>innerhalb / außerhalb</strong>
+          <span>Gen. = inside / outside of</span>
+          <div class="ex"><em>Innerhalb der Stadt</em>.</div>
+        </div>
+      </div>
+      <div class="tip" style="margin-top:0">
+        <strong>⚠️ Umgangssprache</strong>
+        Im gesprochenen Deutsch steht nach <em>wegen / trotz / statt</em> häufig der Dativ: «wegen dem Regen» ist umgangssprachlich üblich, gilt aber im schriftlichen Deutsch als falsch.
+      </div>
+    </div>
+
+    <!-- WECHSELPRÄPOSITIONEN -->
+    <div class="prep-section">
+      <div class="prep-header">
+        <div class="prep-case-badge wechsel">Wechsel</div>
+        <h3>Wechselpräpositionen — Dativ oder Akkusativ?</h3>
+      </div>
+      <div class="wechsel-note">
+        <strong>Grundregel:</strong> WO? → Dativ (statischer Ort) · WOHIN? → Akkusativ (Bewegung / Ziel)<br>
+        <span style="color:#aaa">Les 9 Wechselpräpositionen: <strong>AN · AUF · HINTER · IN · NEBEN · ÜBER · UNTER · VOR · ZWISCHEN</strong></span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Präposition</th>
+            <th>+ Dativ (WO?)</th>
+            <th>+ Akkusativ (WOHIN?)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>an</strong></td>
+            <td>Das Bild hängt <em class="highlight">an der Wand</em>.</td>
+            <td>Ich hänge das Bild <em class="highlight">an die Wand</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>auf</strong></td>
+            <td>Das Buch liegt <em class="highlight">auf dem Tisch</em>.</td>
+            <td>Ich lege das Buch <em class="highlight">auf den Tisch</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>hinter</strong></td>
+            <td>Er sitzt <em class="highlight">hinter dem Haus</em>.</td>
+            <td>Er geht <em class="highlight">hinter das Haus</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>in</strong></td>
+            <td>Sie ist <em class="highlight">in der Schule</em>.</td>
+            <td>Sie geht <em class="highlight">in die Schule</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>neben</strong></td>
+            <td>Er steht <em class="highlight">neben dem Auto</em>.</td>
+            <td>Er stellt sich <em class="highlight">neben das Auto</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>über</strong></td>
+            <td>Die Lampe hängt <em class="highlight">über dem Tisch</em>.</td>
+            <td>Ich hänge die Lampe <em class="highlight">über den Tisch</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>unter</strong></td>
+            <td>Die Katze schläft <em class="highlight">unter dem Bett</em>.</td>
+            <td>Die Katze kriecht <em class="highlight">unter das Bett</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>vor</strong></td>
+            <td>Er wartet <em class="highlight">vor der Tür</em>.</td>
+            <td>Er tritt <em class="highlight">vor die Tür</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>zwischen</strong></td>
+            <td>Sie sitzt <em class="highlight">zwischen den Stühlen</em>.</td>
+            <td>Sie setzt sich <em class="highlight">zwischen die Stühle</em>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tip" style="margin-top:20px">
+        <strong>💡 Schlüsselverben</strong>
+        <strong>Dativ (WO?)</strong> → liegen, stehen, hängen, sitzen, sein, bleiben, schlafen…<br>
+        <strong>Akkusativ (WOHIN?)</strong> → legen, stellen, hängen, setzen, gehen, fahren, laufen…<br>
+        Achtung: <em>hängen</em> existiert in beiden Formen!
+      </div>
+    </div>
+
+    <!-- KONTRAKTIONEN -->
+    <div class="table-block">
+      <div class="table-label">Häufige Kontraktionen (Präposition + Artikel)</div>
+      <table>
+        <thead>
+          <tr><th>Vollform</th><th>Kontraktion</th><th>Beispiel</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>an + dem</td><td class="highlight">am</td><td>am Montag · am Tisch</td></tr>
+          <tr><td>an + das</td><td class="highlight">ans</td><td>ans Meer fahren</td></tr>
+          <tr><td>auf + das</td><td class="highlight">aufs</td><td>aufs Land fahren</td></tr>
+          <tr><td>bei + dem</td><td class="highlight">beim</td><td>beim Arzt · beim Essen</td></tr>
+          <tr><td>in + dem</td><td class="highlight">im</td><td>im Haus · im Winter</td></tr>
+          <tr><td>in + das</td><td class="highlight">ins</td><td>ins Kino gehen</td></tr>
+          <tr><td>von + dem</td><td class="highlight">vom</td><td>vom Bahnhof kommen</td></tr>
+          <tr><td>zu + dem</td><td class="highlight">zum</td><td>zum Arzt gehen</td></tr>
+          <tr><td>zu + der</td><td class="highlight">zur</td><td>zur Schule gehen</td></tr>
+          <tr><td>durch + das</td><td class="highlight">durchs</td><td>durchs Fenster sehen</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- §6 PERFEKT & PRÄTERITUM -->
+  <div class="section" id="vergangenheit">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div class="section-title-block">
+        <h2>Perfekt &amp; Präteritum</h2>
+        <p>Passé composé · Imparfait / Passé simple</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>📌 Wann welches Tempus?</strong>
+      <strong>Perfekt</strong> = gesprochene Vergangenheit, Alltagssprache (« j'ai fait »). <strong>Präteritum</strong> = schriftliche Vergangenheit, Erzählungen, Literatur (« je fis / je faisais »). Ausnahme: <em>sein, haben, werden</em> und Modalverben → immer Präteritum, auch mündlich.
+    </div>
+
+    <!-- PERFEKT -->
+    <div style="margin-bottom: 48px;">
+      <div class="prep-header" style="margin-bottom:16px">
+        <div class="prep-case-badge" style="background:#2a6b2a">Perfekt</div>
+        <h3>Das Perfekt — haben oder sein?</h3>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div style="border:2px solid var(--black);padding:20px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:10px">haben + Partizip II</div>
+          <p style="font-size:13px;margin-bottom:10px">Die meisten Verben — transitiv oder ohne Bewegung/Zustandsänderung.</p>
+          <div class="example" style="background:var(--grey-light);padding:10px 14px;font-family:'IBM Plex Mono',monospace;font-size:13px;border-left:3px solid var(--gold);margin-top:8px">
+            Ich <em style="color:var(--red)">habe</em> gegessen.<br>
+            Er <em style="color:var(--red)">hat</em> gespielt.<br>
+            Wir <em style="color:var(--red)">haben</em> gearbeitet.
+          </div>
+        </div>
+        <div style="border:2px solid var(--black);padding:20px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:10px">sein + Partizip II</div>
+          <p style="font-size:13px;margin-bottom:10px">Verben der Bewegung / Zustandsänderung + <em>sein, bleiben, werden</em>.</p>
+          <div class="example" style="background:var(--grey-light);padding:10px 14px;font-family:'IBM Plex Mono',monospace;font-size:13px;border-left:3px solid var(--red);margin-top:8px">
+            Ich <em style="color:var(--red)">bin</em> gegangen.<br>
+            Er <em style="color:var(--red)">ist</em> aufgestanden.<br>
+            Sie <em style="color:var(--red)">ist</em> eingeschlafen.
+          </div>
+        </div>
+      </div>
+
+      <div class="table-block">
+        <div class="table-label">Bildung des Partizip II</div>
+        <table>
+          <thead>
+            <tr><th>Typ</th><th>Schema</th><th>Beispiele</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Regelmäßig (schwach)</strong></td>
+              <td class="highlight">ge- + Stamm + -t</td>
+              <td>spielen → ge<strong>spiel</strong>t · kaufen → ge<strong>kauf</strong>t · arbeiten → ge<strong>arbeit</strong>et</td>
+            </tr>
+            <tr>
+              <td><strong>Unregelmäßig (stark)</strong></td>
+              <td class="highlight">ge- + Stamm (verändert) + -en</td>
+              <td>fahren → ge<strong>fahr</strong>en · schreiben → ge<strong>schrieb</strong>en · singen → ge<strong>sung</strong>en</td>
+            </tr>
+            <tr>
+              <td><strong>Trennbare Verben</strong></td>
+              <td class="highlight">Präfix + ge + Stamm + -t/-en</td>
+              <td>aufmachen → auf<strong>ge</strong>macht · einschlafen → ein<strong>ge</strong>schlafen</td>
+            </tr>
+            <tr>
+              <td><strong>Untrennbare Verben</strong></td>
+              <td class="highlight">Kein ge- !</td>
+              <td>besuchen → besucht · verstehen → verstanden · erklären → erklärt</td>
+            </tr>
+            <tr>
+              <td><strong>Verben auf -ieren</strong></td>
+              <td class="highlight">Stamm + -t (kein ge-)</td>
+              <td>studieren → studiert · telefonieren → telefoniert</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-block">
+        <div class="table-label">Konjugation haben / sein im Perfekt</div>
+        <table>
+          <thead>
+            <tr><th>Person</th><th>haben (Hilfsverb)</th><th>sein (Hilfsverb)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ich</td><td class="highlight">habe</td><td class="highlight">bin</td></tr>
+            <tr><td>du</td><td class="highlight">hast</td><td class="highlight">bist</td></tr>
+            <tr><td>er / sie / es</td><td class="highlight">hat</td><td class="highlight">ist</td></tr>
+            <tr><td>wir</td><td class="highlight">haben</td><td class="highlight">sind</td></tr>
+            <tr><td>ihr</td><td class="highlight">habt</td><td class="highlight">seid</td></tr>
+            <tr><td>sie / Sie</td><td class="highlight">haben</td><td class="highlight">sind</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PRÄTERITUM -->
+    <div style="margin-bottom:48px">
+      <div class="prep-header" style="margin-bottom:16px">
+        <div class="prep-case-badge" style="background:var(--blue)">Präteritum</div>
+        <h3>Das Präteritum — Bildung</h3>
+      </div>
+
+      <div class="table-block">
+        <div class="table-label">Schwache (regelmäßige) Verben — Stamm + -te-</div>
+        <table>
+          <thead>
+            <tr><th>Person</th><th>spielen</th><th>kaufen</th><th>arbeiten</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ich</td><td class="highlight">spielte</td><td class="highlight">kaufte</td><td class="highlight">arbeitete</td></tr>
+            <tr><td>du</td><td class="highlight">spieltest</td><td class="highlight">kauftest</td><td class="highlight">arbeitetest</td></tr>
+            <tr><td>er/sie/es</td><td class="highlight">spielte</td><td class="highlight">kaufte</td><td class="highlight">arbeitete</td></tr>
+            <tr><td>wir</td><td class="highlight">spielten</td><td class="highlight">kauften</td><td class="highlight">arbeiteten</td></tr>
+            <tr><td>ihr</td><td class="highlight">spieltet</td><td class="highlight">kauftet</td><td class="highlight">arbeitetet</td></tr>
+            <tr><td>sie / Sie</td><td class="highlight">spielten</td><td class="highlight">kauften</td><td class="highlight">arbeiteten</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-block">
+        <div class="table-label">Starke (unregelmäßige) Verben — Stammvokalwechsel (auswendig lernen!)</div>
+        <table>
+          <thead>
+            <tr><th>Infinitiv</th><th>Präteritum (ich)</th><th>Partizip II</th><th>Hilfsverb</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>sein</td><td class="highlight">war</td><td>gewesen</td><td>sein</td></tr>
+            <tr><td>haben</td><td class="highlight">hatte</td><td>gehabt</td><td>haben</td></tr>
+            <tr><td>werden</td><td class="highlight">wurde</td><td>geworden</td><td>sein</td></tr>
+            <tr><td>gehen</td><td class="highlight">ging</td><td>gegangen</td><td>sein</td></tr>
+            <tr><td>kommen</td><td class="highlight">kam</td><td>gekommen</td><td>sein</td></tr>
+            <tr><td>fahren</td><td class="highlight">fuhr</td><td>gefahren</td><td>sein</td></tr>
+            <tr><td>sehen</td><td class="highlight">sah</td><td>gesehen</td><td>haben</td></tr>
+            <tr><td>schreiben</td><td class="highlight">schrieb</td><td>geschrieben</td><td>haben</td></tr>
+            <tr><td>sprechen</td><td class="highlight">sprach</td><td>gesprochen</td><td>haben</td></tr>
+            <tr><td>essen</td><td class="highlight">aß</td><td>gegessen</td><td>haben</td></tr>
+            <tr><td>lesen</td><td class="highlight">las</td><td>gelesen</td><td>haben</td></tr>
+            <tr><td>geben</td><td class="highlight">gab</td><td>gegeben</td><td>haben</td></tr>
+            <tr><td>nehmen</td><td class="highlight">nahm</td><td>genommen</td><td>haben</td></tr>
+            <tr><td>finden</td><td class="highlight">fand</td><td>gefunden</td><td>haben</td></tr>
+            <tr><td>bleiben</td><td class="highlight">blieb</td><td>geblieben</td><td>sein</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-block">
+        <div class="table-label">Modalverben im Präteritum (sehr häufig — auswendig lernen!)</div>
+        <table>
+          <thead>
+            <tr><th>Infinitiv</th><th>ich</th><th>du</th><th>er/sie/es</th><th>wir</th><th>ihr</th><th>sie/Sie</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>können</strong></td><td class="highlight">konnte</td><td>konntest</td><td>konnte</td><td>konnten</td><td>konntet</td><td>konnten</td></tr>
+            <tr><td><strong>müssen</strong></td><td class="highlight">musste</td><td>musstest</td><td>musste</td><td>mussten</td><td>musstet</td><td>mussten</td></tr>
+            <tr><td><strong>wollen</strong></td><td class="highlight">wollte</td><td>wolltest</td><td>wollte</td><td>wollten</td><td>wolltet</td><td>wollten</td></tr>
+            <tr><td><strong>dürfen</strong></td><td class="highlight">durfte</td><td>durftest</td><td>durfte</td><td>durften</td><td>durftet</td><td>durften</td></tr>
+            <tr><td><strong>sollen</strong></td><td class="highlight">sollte</td><td>solltest</td><td>sollte</td><td>sollten</td><td>solltet</td><td>sollten</td></tr>
+            <tr><td><strong>mögen</strong></td><td class="highlight">mochte</td><td>mochtest</td><td>mochte</td><td>mochten</td><td>mochtet</td><td>mochten</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip">
+        <strong>💡 Starke Verben: Präteritum-Endungen</strong>
+        <em>ich</em> und <em>er/sie/es</em> haben <strong>keine Endung</strong> im Präteritum bei starken Verben (ich fuhr, er fuhr). Du → -st · Wir/Sie → -en · Ihr → -t.
+      </div>
+    </div>
+  </div>
+
+  <!-- §7 PASSIV -->
+  <div class="section" id="passiv">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div class="section-title-block">
+        <h2>Das Passiv</h2>
+        <p>Vorgangspassiv · Zustandspassiv</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>📌 Was ist das Passiv?</strong>
+      Im Passiv steht die Handlung im Vordergrund, nicht der Handelnde. Das Objekt des Aktivsatzes wird zum Subjekt. Der Handelnde kann mit <strong>von + Dativ</strong> angegeben werden.
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px">
+      <div style="border:2px solid var(--black);padding:20px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Aktiv</div>
+        <p style="font-size:14px">Der Koch <strong style="color:var(--red)">kocht</strong> die Suppe.</p>
+        <p style="font-size:12px;color:var(--grey);margin-top:6px">Subjekt (Koch) = Handelnder</p>
+      </div>
+      <div style="border:2px solid var(--black);padding:20px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Passiv</div>
+        <p style="font-size:14px">Die Suppe <strong style="color:var(--red)">wird</strong> (vom Koch) <strong style="color:var(--red)">gekocht</strong>.</p>
+        <p style="font-size:12px;color:var(--grey);margin-top:6px">Subjekt (Suppe) = betroffenes Objekt</p>
+      </div>
+    </div>
+
+    <!-- VORGANGSPASSIV -->
+    <div class="table-block">
+      <div class="table-label">Vorgangspassiv — werden + Partizip II (alle Zeiten)</div>
+      <table>
+        <thead>
+          <tr><th>Tempus</th><th>Bildung</th><th>Beispiel</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Präsens</strong></td>
+            <td class="highlight">wird + Partizip II</td>
+            <td>Das Buch <em>wird gelesen</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>Präteritum</strong></td>
+            <td class="highlight">wurde + Partizip II</td>
+            <td>Das Buch <em>wurde gelesen</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>Perfekt</strong></td>
+            <td class="highlight">ist + Partizip II + worden</td>
+            <td>Das Buch <em>ist gelesen worden</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>Plusquamperfekt</strong></td>
+            <td class="highlight">war + Partizip II + worden</td>
+            <td>Das Buch <em>war gelesen worden</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>Futur I</strong></td>
+            <td class="highlight">wird + Partizip II + werden</td>
+            <td>Das Buch <em>wird gelesen werden</em>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-block">
+      <div class="table-label">werden — Konjugation Präsens &amp; Präteritum</div>
+      <table>
+        <thead>
+          <tr><th>Person</th><th>Präsens</th><th>Präteritum</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ich</td><td class="highlight">werde</td><td class="highlight">wurde</td></tr>
+          <tr><td>du</td><td class="highlight">wirst</td><td class="highlight">wurdest</td></tr>
+          <tr><td>er / sie / es</td><td class="highlight">wird</td><td class="highlight">wurde</td></tr>
+          <tr><td>wir</td><td class="highlight">werden</td><td class="highlight">wurden</td></tr>
+          <tr><td>ihr</td><td class="highlight">werdet</td><td class="highlight">wurdet</td></tr>
+          <tr><td>sie / Sie</td><td class="highlight">werden</td><td class="highlight">wurden</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ZUSTANDSPASSIV -->
+    <div class="table-block">
+      <div class="table-label">Zustandspassiv — sein + Partizip II (Ergebnis einer Handlung)</div>
+      <table>
+        <thead>
+          <tr><th>Tempus</th><th>Bildung</th><th>Beispiel</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Präsens</strong></td>
+            <td class="highlight">ist + Partizip II</td>
+            <td>Das Geschäft <em>ist geschlossen</em>. (= es ist jetzt zu)</td>
+          </tr>
+          <tr>
+            <td><strong>Präteritum</strong></td>
+            <td class="highlight">war + Partizip II</td>
+            <td>Das Geschäft <em>war geschlossen</em>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px">
+      <div style="border:2px solid var(--black);padding:20px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:2a6b2a;color:#2a6b2a;margin-bottom:10px">Vorgangspassiv</div>
+        <p style="font-size:13px">Die Tür <strong>wird geschlossen</strong>.</p>
+        <p style="font-size:12px;color:var(--grey);margin-top:4px">→ Jemand schließt sie gerade (Prozess)</p>
+      </div>
+      <div style="border:2px solid var(--black);padding:20px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:10px">Zustandspassiv</div>
+        <p style="font-size:13px">Die Tür <strong>ist geschlossen</strong>.</p>
+        <p style="font-size:12px;color:var(--grey);margin-top:4px">→ Die Tür befindet sich im Zustand "zu" (Resultat)</p>
+      </div>
+    </div>
+
+    <div class="table-block">
+      <div class="table-label">Passiv mit Modalverben — müssen / können / sollen + Partizip II + werden</div>
+      <table>
+        <thead>
+          <tr><th>Aktiv</th><th>Passiv</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Man muss das Formular ausfüllen.</td><td class="highlight">Das Formular muss ausgefüllt werden.</td></tr>
+          <tr><td>Man kann das Problem lösen.</td><td class="highlight">Das Problem kann gelöst werden.</td></tr>
+          <tr><td>Man soll den Müll trennen.</td><td class="highlight">Der Müll soll getrennt werden.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip">
+      <strong>⚠️ Achtung: worden vs. geworden</strong>
+      Im Passiv-Perfekt: <em>worden</em> (ohne «ge-»): Das Haus <strong>ist gebaut worden</strong>.<br>
+      Das Perfekt von <em>werden</em> (aktiv): <strong>ist geworden</strong>: Er <strong>ist</strong> Arzt <strong>geworden</strong>.
+    </div>
+  </div>
+
+  <!-- §8 KOMPARATIV & SUPERLATIV -->
+  <div class="section" id="komparativ">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div class="section-title-block">
+        <h2>Komparativ &amp; Superlativ</h2>
+        <p>Steigerung der Adjektive und Adverbien</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>📌 Die drei Stufen</strong>
+      <strong>Positiv</strong> (Grundstufe) → <strong>Komparativ</strong> (mehr als) → <strong>Superlativ</strong> (das Meiste). Alle drei können als Adjektiv (mit Deklination) oder als Adverb (unveränderlich) stehen.
+    </div>
+
+    <div class="table-block">
+      <div class="table-label">Regelmäßige Bildung</div>
+      <table>
+        <thead>
+          <tr><th>Positiv</th><th>Komparativ</th><th>Superlativ (Adjektiv)</th><th>Superlativ (Adverb)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>schnell</td>
+            <td class="highlight">schnell<strong style="color:var(--red)">er</strong></td>
+            <td class="highlight">der schnell<strong style="color:var(--red)">ste</strong></td>
+            <td class="highlight">am schnell<strong style="color:var(--red)">sten</strong></td>
+          </tr>
+          <tr>
+            <td>klein</td>
+            <td class="highlight">klein<strong style="color:var(--red)">er</strong></td>
+            <td class="highlight">der klein<strong style="color:var(--red)">ste</strong></td>
+            <td class="highlight">am klein<strong style="color:var(--red)">sten</strong></td>
+          </tr>
+          <tr>
+            <td>billig</td>
+            <td class="highlight">billig<strong style="color:var(--red)">er</strong></td>
+            <td class="highlight">der billig<strong style="color:var(--red)">ste</strong></td>
+            <td class="highlight">am billig<strong style="color:var(--red)">sten</strong></td>
+          </tr>
+          <tr>
+            <td>leise</td>
+            <td class="highlight">leise<strong style="color:var(--red)">r</strong></td>
+            <td class="highlight">der leise<strong style="color:var(--red)">ste</strong></td>
+            <td class="highlight">am leise<strong style="color:var(--red)">sten</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-block">
+      <div class="table-label">Adjektive auf -t, -d, -s, -sch, -x, -z → Superlativ auf -esten</div>
+      <table>
+        <thead>
+          <tr><th>Positiv</th><th>Komparativ</th><th>Superlativ Adverb</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>heiß</td><td class="highlight">heißer</td><td class="highlight">am heiß<strong style="color:var(--red)">esten</strong></td></tr>
+          <tr><td>kurz</td><td class="highlight">kürzer</td><td class="highlight">am kürz<strong style="color:var(--red)">esten</strong></td></tr>
+          <tr><td>wild</td><td class="highlight">wilder</td><td class="highlight">am wild<strong style="color:var(--red)">esten</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-block">
+      <div class="table-label">Umlaut-Adjektive — sehr häufig! (a / o / u → ä / ö / ü im Komparativ & Superlativ)</div>
+      <table>
+        <thead>
+          <tr><th>Positiv</th><th>Komparativ</th><th>Superlativ (Adjektiv)</th><th>Superlativ (Adverb)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>alt</td><td class="highlight"><strong style="color:var(--red)">ä</strong>lter</td><td class="highlight">der <strong style="color:var(--red)">ä</strong>lteste</td><td class="highlight">am <strong style="color:var(--red)">ä</strong>ltesten</td></tr>
+          <tr><td>jung</td><td class="highlight"><strong style="color:var(--red)">jü</strong>nger</td><td class="highlight">der <strong style="color:var(--red)">jü</strong>ngste</td><td class="highlight">am <strong style="color:var(--red)">jü</strong>ngsten</td></tr>
+          <tr><td>lang</td><td class="highlight">l<strong style="color:var(--red)">ä</strong>nger</td><td class="highlight">der l<strong style="color:var(--red)">ä</strong>ngste</td><td class="highlight">am l<strong style="color:var(--red)">ä</strong>ngsten</td></tr>
+          <tr><td>groß</td><td class="highlight">gr<strong style="color:var(--red)">ö</strong>ßer</td><td class="highlight">der gr<strong style="color:var(--red)">ö</strong>ßte</td><td class="highlight">am gr<strong style="color:var(--red)">ö</strong>ßten</td></tr>
+          <tr><td>kurz</td><td class="highlight">k<strong style="color:var(--red)">ü</strong>rzer</td><td class="highlight">der k<strong style="color:var(--red)">ü</strong>rzeste</td><td class="highlight">am k<strong style="color:var(--red)">ü</strong>rzesten</td></tr>
+          <tr><td>warm</td><td class="highlight">w<strong style="color:var(--red)">ä</strong>rmer</td><td class="highlight">der w<strong style="color:var(--red)">ä</strong>rmste</td><td class="highlight">am w<strong style="color:var(--red)">ä</strong>rmsten</td></tr>
+          <tr><td>kalt</td><td class="highlight">k<strong style="color:var(--red)">ä</strong>lter</td><td class="highlight">der k<strong style="color:var(--red)">ä</strong>lteste</td><td class="highlight">am k<strong style="color:var(--red)">ä</strong>ltesten</td></tr>
+          <tr><td>stark</td><td class="highlight">st<strong style="color:var(--red)">ä</strong>rker</td><td class="highlight">der st<strong style="color:var(--red)">ä</strong>rkste</td><td class="highlight">am st<strong style="color:var(--red)">ä</strong>rksten</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-block">
+      <div class="table-label">Unregelmäßige Steigerung — auswendig lernen!</div>
+      <table>
+        <thead>
+          <tr><th>Positiv</th><th>Komparativ</th><th>Superlativ (Adjektiv)</th><th>Superlativ (Adverb)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>gut</td><td class="highlight">besser</td><td class="highlight">der beste</td><td class="highlight">am besten</td></tr>
+          <tr><td>viel</td><td class="highlight">mehr</td><td class="highlight">der meiste</td><td class="highlight">am meisten</td></tr>
+          <tr><td>gern</td><td class="highlight">lieber</td><td class="highlight">der liebste</td><td class="highlight">am liebsten</td></tr>
+          <tr><td>hoch</td><td class="highlight">höher</td><td class="highlight">der höchste</td><td class="highlight">am höchsten</td></tr>
+          <tr><td>nah</td><td class="highlight">näher</td><td class="highlight">der nächste</td><td class="highlight">am nächsten</td></tr>
+          <tr><td>wenig</td><td class="highlight">weniger / minder</td><td class="highlight">der wenigste</td><td class="highlight">am wenigsten</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- VERGLEICHSSTRUKTUREN -->
+    <div style="margin-bottom:32px">
+      <div class="prep-header" style="margin-bottom:16px">
+        <div class="prep-case-badge" style="background:var(--black)">Vergleiche</div>
+        <h3>Vergleichsstrukturen</h3>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+        <div style="border:2px solid var(--black);padding:18px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--grey);margin-bottom:8px;text-transform:uppercase">Gleichheit</div>
+          <div style="font-size:15px;font-weight:500;margin-bottom:6px">so … wie</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--blue)">Er ist <strong>so groß wie</strong> ich.</div>
+          <div style="font-size:12px;color:var(--grey);margin-top:4px">aussi … que</div>
+        </div>
+        <div style="border:2px solid var(--black);padding:18px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--grey);margin-bottom:8px;text-transform:uppercase">Ungleichheit</div>
+          <div style="font-size:15px;font-weight:500;margin-bottom:6px">nicht so … wie</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--blue)">Sie ist <strong>nicht so alt wie</strong> er.</div>
+          <div style="font-size:12px;color:var(--grey);margin-top:4px">pas aussi … que</div>
+        </div>
+        <div style="border:2px solid var(--black);padding:18px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--grey);margin-bottom:8px;text-transform:uppercase">Mehr als</div>
+          <div style="font-size:15px;font-weight:500;margin-bottom:6px">Komp. + als</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--blue)">Er ist <strong>größer als</strong> ich.</div>
+          <div style="font-size:12px;color:var(--grey);margin-top:4px">plus … que</div>
+        </div>
+      </div>
+
+      <div class="table-block">
+        <div class="table-label">Weitere Vergleichsausdrücke</div>
+        <table>
+          <thead>
+            <tr><th>Struktur</th><th>Bedeutung</th><th>Beispiel</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="highlight">immer + Komparativ</td>
+              <td>de plus en plus</td>
+              <td>Es wird <em>immer kälter</em>. / Die Preise steigen <em>immer höher</em>.</td>
+            </tr>
+            <tr>
+              <td class="highlight">je … desto/umso</td>
+              <td>plus … plus</td>
+              <td><em>Je mehr</em> er lernt, <em>desto besser</em> wird er.</td>
+            </tr>
+            <tr>
+              <td class="highlight">viel + Komparativ</td>
+              <td>beaucoup plus</td>
+              <td>Das ist <em>viel besser</em> als vorher.</td>
+            </tr>
+            <tr>
+              <td class="highlight">etwas / ein bisschen + Komparativ</td>
+              <td>un peu plus</td>
+              <td>Könntest du <em>etwas lauter</em> sprechen?</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip">
+        <strong>💡 Superlativ als Adjektiv — Deklination</strong>
+        Der Superlativ dekliniert wie ein schwaches Adjektiv nach bestimmtem Artikel: <em>der schnell<strong>ste</strong> Mann · die schnell<strong>ste</strong> Frau · den schnell<strong>sten</strong> Läufer</em>. Adverbiell (ohne Artikel) steht immer: <strong>am -sten</strong> → unveränderlich.
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span>Deutsche Grammatik</span> — Grundlagenreferenz · Lycée Ampère · ECG1B
+</footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function showAdj(type) {
+    document.querySelectorAll('.adj-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.adj-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('adj-' + type).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
